@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "DeleteStudent";
+}
+
+<h2>DeleteStudent</h2>
+
+<form method="post" action="">
+    <table>
+        @*<tr><td><p>Enter first name </p></td><td><input type="text" name="FirstName" /> </td></tr>
+        <tr><td><p>Enter lirst name </p></td><td><input type="text" name="LastName" /> </td></tr>*@
+        <tr>
+                <td><p>Please select a student :</p></td>
+                <td>
+
+                    <select name="StudentId">
+
+                        @foreach (var cr in ViewBag.AllStudents)
+
+                        {
+
+                            <option>@cr.StudentId</option>
+
+                        }
+                    </select>
+                </td>
+            </tr>
+        <tr><td><input type="submit" value="Submit" /> </td><td></td></tr>
+    </table>
+</form>

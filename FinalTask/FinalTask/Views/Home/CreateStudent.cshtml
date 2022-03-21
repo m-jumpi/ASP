@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "CreateStudent";
+}
+
+<h2>Create Student</h2>
+
+<h3>Please fill in data to create a student</h3>
+<form method="post" action="">
+    <table>
+        <tr><td><p>Enter first name </p></td><td><input type="text" name="FirstName" /> </td></tr>
+        <tr><td><p>Enter lirst name </p></td><td><input type="text" name="LastName" /> </td></tr>
+        @*<tr>
+            <td><p>Выберите из списка тип кредита :</p></td>
+            <td>
+
+                <select name="CreditHead">
+
+                    @foreach (var cr in ViewBag.Credits)
+
+                    {
+
+                        <option>@cr.Head</option>
+
+                    }
+                </select>
+            </td>
+        </tr>*@
+        <tr><td><input type="submit" value="Submit" /> </td><td></td></tr>
+    </table>
+</form>
