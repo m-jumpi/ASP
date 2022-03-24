@@ -28,14 +28,20 @@ namespace FinalTask.Models
             Subject subject1 = new Subject { SubjectName = "Giology" };
             Subject subject2 = new Subject { SubjectName = "Math" };
 
-            context.SubjecstStudents.Add(new SubjectStudent { Grade = "A", Student = student1, Subject = subject1 });
-            context.SubjecstStudents.Add(new SubjectStudent { Grade="B", Student=student1, Subject=subject2});
 
-            context.SubjecstStudents.Add(new SubjectStudent { Grade = "B", Student = student2, Subject = subject1 });
-            context.SubjecstStudents.Add(new SubjectStudent { Grade = "C", Student = student2, Subject = subject2 });
+            Grade a = new Grade { GradeName = "5" };
+            Grade b = new Grade { GradeName = "4" };
+            Grade c = new Grade { GradeName = "3" };
+            Grade d = new Grade { GradeName = "2" };
+            context.Grades.Add(a);
+            context.Grades.Add(b);
+            context.Grades.Add(c);
+            context.Grades.Add(d);
 
-            //SubjectStudent ss = new SubjectStudent();
-            //ss.Subject.SubjectName
+            context.SubjecstStudents.Add(new SubjectStudent { Grade = a, Student = student1, Subject = subject1 });
+            context.SubjecstStudents.Add(new SubjectStudent { Grade = b, Student = student1, Subject = subject2 });
+            context.SubjecstStudents.Add(new SubjectStudent { Grade = c, Student = student2, Subject = subject1 });
+            context.SubjecstStudents.Add(new SubjectStudent { Grade = c, Student = student2, Subject = subject2 });
 
             base.Seed(context);
         }

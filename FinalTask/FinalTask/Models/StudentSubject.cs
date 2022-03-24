@@ -16,13 +16,7 @@ namespace FinalTask.Models
         public DbSet<Subject> Subjects { get; set; }
 
         public DbSet<SubjectStudent> SubjecstStudents { get; set; }
-        //protected override void OnModelCreating(ModuleBuilder modelBuilder)
-        //{
-        //    modelBuilder
-        //        .Entity<Student>()
-        //        .HasMany(p => p.Subjects)
-        //        .WithMany(p => p.Students)
-        //        .UsingEntity(j => j.HasData(new { Subject_SubjectId = 1, Student_StudentId = 1 }));
-        //}
+
+        public DbSet<Grade> Grades { get; set; }
     }
 }

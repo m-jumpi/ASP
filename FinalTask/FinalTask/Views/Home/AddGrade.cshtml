@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "AddGrade";
+}
+
+<h2>Add Grade</h2>
+
+<form method="post" action="">
+    <table>
+        <tr>
+            <td><p>Select a student :</p></td>
+            <td>
+
+                <select name="StudentId">
+
+                    @foreach (var cr in ViewBag.AllStudents)
+                    {
+                        <option value="@cr.StudentId">@cr.FirstName @cr.LastName</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><p>Select a subject :</p></td>
+            <td>
+
+                <select name="SubjectId">
+
+                    @foreach (var cr in ViewBag.AllSubjets)
+                    {
+                        <option value="@cr.SubjectId">@cr.SubjectName</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><p>Select a grade :</p></td>
+            <td>
+
+                <select name="GradeId">
+
+                    @foreach (var cr in ViewBag.AllGrades)
+                    {
+                        <option value="@cr.GradeId">@cr.GradeName</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr><td><input type="submit" value="Submit" /> </td><td></td></tr>
+    </table>
+</form>

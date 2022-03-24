@@ -10,14 +10,43 @@ namespace FinalTask.Controllers
     public class HomeController : Controller
     {
         private StudentSubject db = new StudentSubject();
+
+        [HttpGet]
         public ActionResult Index()
         {
-            GetStudents();
-            GetSubjects();
+            var allStudents = db.Students.ToList<Student>();
+            ViewBag.AllStudents = allStudents;
 
+            var allSubjects = db.Subjects.ToList<Subject>();
+            ViewBag.AllSubjets = allSubjects;
+
+            var allGrades = db.Grades.ToList<Grade>();
+            ViewBag.AllGrades = allGrades;
+
+            var allSubjectStudents = db.SubjecstStudents.ToList<SubjectStudent>();
+            ViewBag.AllSubjectStudents = allSubjectStudents;
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Index(Student selectedStudent)
+        {
+            var allStudents = db.Students.ToList<Student>();
+            ViewBag.AllStudents = allStudents;
+
+            var allSubjects = db.Subjects.ToList<Subject>();
+            ViewBag.AllSubjets = allSubjects;
+
+            var allGrades = db.Grades.ToList<Grade>();
+            ViewBag.AllGrades = allGrades;
+
+            var allXSubjectStudents = db.SubjecstStudents.ToList<SubjectStudent>();
+            ViewBag.AllXSubjectStudents = allXSubjectStudents;
+
+            var allSubjectStudents = db.SubjecstStudents.SqlQuery($"select * from dbo.SubjectStudents where Student_StudentId={selectedStudent.StudentId}").ToList<SubjectStudent>();
+            ViewBag.AllSubjectStudents = allSubjectStudents;
+            return View();
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -25,24 +54,17 @@ namespace FinalTask.Controllers
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+        //private void GetStudents()
+        //{
+        //    var allStudents = db.Students.ToList<Student>();
+        //    ViewBag.AllStudents = allStudents;
+        //}
 
-            return View();
-        }
-
-        private void GetStudents()
-        {
-            var allStudents = db.Students.ToList<Student>();
-            ViewBag.AllStudents = allStudents;
-        }
-
-        private void GetSubjects()
-        {
-            var allSubjects = db.Subjects.ToList<Subject>();
-            ViewBag.AllSubjets = allSubjects;
-        }
+        //private void GetSubjects()
+        //{
+        //    var allSubjects = db.Subjects.ToList<Subject>();
+        //    ViewBag.AllSubjets = allSubjects;
+        //}
 
         [HttpGet]
         public ActionResult CreateStudent()
@@ -64,6 +86,7 @@ namespace FinalTask.Controllers
             return View();
         }
 
+        [HttpPost]
         public string CreateSubject(Subject newSubject)
         {
             db.Subjects.Add(newSubject);
@@ -85,11 +108,11 @@ namespace FinalTask.Controllers
             var delStudent = db.Students.Single(o => o.StudentId == deleteStudent.StudentId);
             db.Students.Remove(delStudent);
             db.SaveChanges();
-            return $"Thank you, subject <b> {delStudent.StudentId} </b> has been deleted";
+            return $"Thank you, student <b> {delStudent.FirstName} {delStudent.LastName} </b> has been deleted";
         }
 
         [HttpGet]
-        public ActionResult ListStudent()
+        public ActionResult AddGrade()
         {
             var allStudents = db.Students.ToList<Student>();
             ViewBag.AllStudents = allStudents;
@@ -97,29 +120,27 @@ namespace FinalTask.Controllers
             var allSubjects = db.Subjects.ToList<Subject>();
             ViewBag.AllSubjets = allSubjects;
 
-            var allSubjectStudents = db.SubjecstStudents.ToList<SubjectStudent>();
-            ViewBag.AllSubjectStudents = allSubjectStudents;
+            var allGrades = db.Grades.ToList<Grade>();
+            ViewBag.AllGrades = allGrades;
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult ListStudent(Student selectedStudent)
+        public ActionResult AddGrade(Student student, Subject subject, Grade grade)
         {
             var allStudents = db.Students.ToList<Student>();
             ViewBag.AllStudents = allStudents;
 
-            //var allStudents = db.Students.ToList<Student>();
-            //ViewBag.AllStudents = allStudents;
-
             var allSubjects = db.Subjects.ToList<Subject>();
             ViewBag.AllSubjets = allSubjects;
 
-            var allXSubjectStudents = db.SubjecstStudents.ToList<SubjectStudent>();
-            ViewBag.AllXSubjectStudents = allXSubjectStudents;
+            var allGrades = db.Grades.ToList<Grade>();
+            ViewBag.AllGrades = allGrades;
 
+            db.Database.ExecuteSqlCommand($"insert into dbo.SubjectStudents (Grade_GradeId, Student_StudentId, Subject_SubjectId) values({grade.GradeId},  {student.StudentId}, {subject.SubjectId})");
+            db.SaveChanges();
 
-            var allSubjectStudents = db.SubjecstStudents.Select(o => o.Student.StudentId == selectedStudent.StudentId);
-            ViewBag.AllSubjectStudents = allSubjectStudents;
             return View();
         }
     }

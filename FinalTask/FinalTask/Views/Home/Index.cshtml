@@ -1,73 +1,48 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    ViewBag.Title = "ListStudent";
 }
 
-@*<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<h2>List of students and their grades</h2>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>*@
+<form method="post" action="">
+    <table>
+        <tr>
+            <td><p>Choose a student from the list :</p></td>
+            <td>
 
-<div class="row">
+                <select name="StudentId">
 
-    <div class="col-md-4">
-        <h1>List of Students</h1>
-        <table class="table-bordered">
+                    @foreach (var cr in ViewBag.AllStudents)
+                    {
+                        <option value="@cr.StudentId">@cr.FirstName @cr.LastName</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr><td><input type="submit" value="Submit" /> </td><td></td></tr>
+    </table>
+    <h2></h2>
+    <table>
+        <tr>
+            <td><p>Enrolmentt Id</p></td>
+            <td><p>First Name</p></td>
+            <td><p>Last Name</p></td>
+            <td><p>Subject Name</p></td>
+            <td><p>Grade</p></td>
+
+        </tr>
+        @foreach (var c in ViewBag.AllSubjectStudents)
+        {
             <tr>
-                <td><p>Student Id</p></td>
-                <td><p>First Name</p></td>
-                <td><p>Last Name</p></td>
+                <td><p>@c.EnrolmentId</p></td>
+                <td><p>@c.Student.FirstName</p></td>
+                <td><p>@c.Student.LastName</p></td>
+                <td><p>@c.Subject.SubjectName</p></td>
+                <td><p>@c.Grade.GradeName</p></td>
             </tr>
-            @foreach (var c in ViewBag.AllStudents)
-            {
-                <tr>
-                    <td><p>@c.StudentId</p></td>
-                    <td><p>@c.FirstName</p></td>
-                    <td><p>@c.LastName</p></td>
-                </tr>
-            }
-        </table>
-
-        <p><a class="btn btn-default" href="/Home/CreateStudent">Add a student &raquo;</a></p>
-        <p><a class="btn btn-default" href="/Home/DeleteStudent">Delete a student &raquo;</a></p>
-
-        <h1>List of Subjets</h1>
-        <table class="table-bordered">
-            <tr>
-                <td><p>Subject</p></td>
-            </tr>
-            @foreach (var c in ViewBag.AllSubjets)
-            {
-                <tr>
-                    <td><p>@c.SubjectName</p></td>
-                </tr>
-            }
-        </table>
-
-        <p><a class="btn btn-default" href="/Home/CreateSubject">Add a Subject &raquo;</a></p>
-        @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
-
-    </div>
-</div>
+        }
+    </table>
+    <h2></h2>
+    <p><a class="btn btn-default" href="/Home/AddGrade">Add Grade &raquo;</a></p>
+</form>

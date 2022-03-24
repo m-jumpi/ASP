@@ -138,6 +138,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DbInitializer.cs" />
+    <Compile Include="Models\Grade.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentSubject.cs" />
     <Compile Include="Models\Subject.cs" />
@@ -178,12 +179,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\CreateStudent.cshtml" />
     <Content Include="Views\Home\CreateSubject.cshtml" />
     <Content Include="Views\Home\DeleteStudent.cshtml" />
-    <Content Include="Views\Home\ListStudent.cshtml" />
+    <Content Include="Views\Home\AddGrade.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
